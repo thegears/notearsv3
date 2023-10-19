@@ -5,16 +5,16 @@ import notEkleComp from './components/notEkleComp.vue'
 import { ref } from 'vue'
 
 function changeBgColor(a: number, b: number, c: number) {
-  document.querySelector("body").style["background-color"] = `rgb(${a},${b},${c})`
+  document.querySelector("body")!.style["background-color" as any] = `rgb(${a},${b},${c})`
 }
 
 window.document.body.onkeydown = (e) => {
-  if (e.key == "Escape" && notEkleCompBool.value || notlarimCompBool.value) {
+  if (e.key == "Escape" && (notEkleCompBool.value || notlarimCompBool.value)) {
     changeComp("")
   }
 }
 
-changeBgColor(18, 18, 18)
+changeBgColor(10, 10, 10)
 const bgOpacity = ref(false)
 
 const notEkleCompBool = ref(false)
@@ -47,11 +47,11 @@ function changeComp(comp: string) {
     </transition>
 
     <transition name="slide-fade">
-      <notEkleComp v-show="notEkleCompBool" :changeComp="changeComp" />
+      <notEkleComp v-if="notEkleCompBool" :changeComp="changeComp" />
     </transition>
 
     <transition name="slide-fade">
-      <notlarimComp v-show="notlarimCompBool" :changeComp="changeComp" />
+      <notlarimComp v-if="notlarimCompBool" :changeComp="changeComp" />
     </transition>
   </div>
 </template>
